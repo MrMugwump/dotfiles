@@ -1,3 +1,3 @@
 return {
-	'airblad/vim-gitgutter'
+	'airblade/vim-gitgutter'
 }
