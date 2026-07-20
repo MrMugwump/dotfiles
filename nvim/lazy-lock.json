@@ -14,5 +14,6 @@
   "ultisnips": { "branch": "master", "commit": "62aca2a735b76d24a8fc7862f902330ac688849b" },
   "vim-fugitive": { "branch": "master", "commit": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0" },
   "vim-gitgutter": { "branch": "main", "commit": "21c977e8597c468c7dc76001389b0b430d46a4b0" },
+  "vim-visual-multi": { "branch": "master", "commit": "a6975e7c1ee157615bbc80fc25e4392f71c344d4" },
   "vimtex": { "branch": "master", "commit": "6368e31fdaf766ff908a2c06e9ee14fc66dec409" }
 }
