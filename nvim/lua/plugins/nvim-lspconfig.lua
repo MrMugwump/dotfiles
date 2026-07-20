@@ -1,7 +1,8 @@
 return { "neovim/nvim-lspconfig",
   dependencies = {
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim"
+    "williamboman/mason-lspconfig.nvim",
+	"hrsh7th/cmp-nvim-lsp",
   },
   config = function()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -12,8 +13,8 @@ return { "neovim/nvim-lspconfig",
     mason_lspconfig.setup {
         ensure_installed = { "pyright" }
     }
-    require("lspconfig").pyright.setup {
+    vim.lsp.config("pyright", {
         capabilities = capabilities,
-    }
+    })
   end
 }
