@@ -1,0 +1,3 @@
+return {
+	'airblad/vim-gitgutter'
+}
