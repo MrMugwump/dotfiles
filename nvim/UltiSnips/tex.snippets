@@ -1,0 +1,104 @@
+global !p
+def math():
+    return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment(): 
+    return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+    return x != '0' and x != '0'
+endglobal
+
+snippet beg "begin" w
+\begin{$1}
+	${2:${VISUAL}}
+\end{$1}
+endsnippet
+
+context "math()"
+snippet frac "fraction" w
+\frac{$1}{$2}
+endsnippet
+
+context "math()"
+snippet ln "natural log" w
+\ln($1)
+endsnippet
+
+context "math()"
+snippet "([^\\])(log)" "logarithm" rw
+`!p snip.rv = match.group(1)`\log`!p snip.rv = "_{" if t[1] else ""`${1:base}`!p snip.rv = "}" if t[1] else ""`(${2:${VISUAL}})
+endsnippet
+
+context "math()"
+snippet lim "limit" w
+\lim_{${1:x}\to ${2:\infty}}
+endsnippet
+
+context "math()"
+snippet "([^\\])(sqrt)" "square root" rw
+`!p snip.rv = match.group(1)`\sqrt`!p snip.rv = "[" if t[1] else ""`${1:base}`!p snip.rv = "]" if t[1] else ""`{${2:${VISUAL}}}
+endsnippet
+
+context "math()"
+snippet ^ "superscript" 
+^{${1:${VISUAL}}}
+endsnippet
+
+context "math()"
+snippet _ "subscript" 
+_{${1:${VISUAL}}}
+endsnippet
+
+context "math()"
+snippet txt "text box" 
+\text{ ${1:${VISUAL}} }
+endsnippet
+
+snippet txti "italic text" w
+\textit{${1:${VISUAL}}
+endsnippet
+
+snippet txtb "bold text" w
+\textbf{$1:${VISUAL}}
+endsnippet
+
+snippet im "inline math" w
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
+# can't select the entire thing, need to not select the last bracket
+context "math()"
+snippet lr "surround with left right" w 
+\left${VISUAL}\right
+endsnippet
+
+context "math()"
+snippet (( "left right parenthesis" w
+\left(${1:${VISUAL}}\right)
+endsnippet
+
+context "math()"
+snippet {{ "left right curly brackets" w
+\left\{${1:${VISUAL}}\right\}
+endsnippet
+
+context "math()"
+snippet [[ "left right square brackets" w
+\left[${1:${VISUAL}}\right]
+endsnippet
+
+snippet imd "displaystyle inline math" w
+$\displaystyle ${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet

@@ -1,0 +1,6 @@
+snippet autocmd "autocommand" 
+vim.api.nvim_create_autocmd({${1:list of triggers}}, {
+	pattern = "${2:pattern}",
+	command = "${3:command}",
+})
+endsnippet
