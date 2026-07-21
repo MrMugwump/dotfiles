@@ -73,6 +73,15 @@ else:
 `$2
 endsnippet
 
+snippet imd "displaystyle inline math" w
+$\displaystyle ${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
 # can't select the entire thing, need to not select the last bracket
 context "math()"
 snippet lr "surround with left right" w 
@@ -94,11 +103,3 @@ snippet [[ "left right square brackets" w
 \left[${1:${VISUAL}}\right]
 endsnippet
 
-snippet imd "displaystyle inline math" w
-$\displaystyle ${1}$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
-    snip.rv = ' '
-else:
-    snip.rv = ''
-`$2
-endsnippet
