@@ -37,10 +37,10 @@ snippet lim "limit" w
 endsnippet
 
 context "math()"
-snippet "([^\\])(sqrt)" "square root" rw
-`!p snip.rv = match.group(1)`\sqrt`!p snip.rv = "[" if t[1] else ""`${1:base}`!p snip.rv = "]" if t[1] else ""`{${2:${VISUAL}}}
+snippet sqrt "square root" w
+\sqrt{${1:${VISUAL}}}
 endsnippet
-
+#`!p snip.rv = match.group(1)`\sqrt`!p snip.rv = "[" if t[1] else ""`${1:base}`!p snip.rv = "]" if t[1] else ""`{${1:test}}$0
 context "math()"
 snippet ^ "superscript" 
 ^{${1:${VISUAL}}}
@@ -57,7 +57,7 @@ snippet txt "text box"
 endsnippet
 
 snippet txti "italic text" w
-\textit{${1:${VISUAL}}
+\textit{${1:${VISUAL}}}
 endsnippet
 
 snippet txtb "bold text" w
@@ -89,17 +89,17 @@ snippet lr "surround with left right" w
 endsnippet
 
 context "math()"
-snippet (( "left right parenthesis" w
+snippet "(\(\()" "left right parenthesis" r
 \left(${1:${VISUAL}}\right)
 endsnippet
 
 context "math()"
-snippet {{ "left right curly brackets" w
+snippet {{ "left right curly brackets"    
 \left\{${1:${VISUAL}}\right\}
 endsnippet
 
 context "math()"
-snippet [[ "left right square brackets" w
+snippet [[ "left right square brackets"   
 \left[${1:${VISUAL}}\right]
 endsnippet
 
