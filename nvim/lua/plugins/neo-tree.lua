@@ -1,9 +1,3 @@
-vim.api.nvim_create_user_command(
-    "ConfigTree",
-    "Neotree dir=" .. vim.fn.stdpath("config"),
-    {}
-)
-
 -- ignore_files = {
 -- 	".swp",
 -- 	".aux",

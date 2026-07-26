@@ -4,3 +4,9 @@ vim.opt.softtabstop = 4
 
 vim.opt.relativenumber = true
 vim.opt.number = true
+
+vim.api.nvim_create_user_command(
+    "Dotfiles",
+    "cd dir=~/dotfiles",
+    {}
+)
