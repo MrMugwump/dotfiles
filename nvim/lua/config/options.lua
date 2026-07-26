@@ -7,6 +7,6 @@ vim.opt.number = true
 
 vim.api.nvim_create_user_command(
     "Dotfiles",
-    "cd dir=~/dotfiles",
+    "cd dir=~/dotfiles/",
     {}
 )
