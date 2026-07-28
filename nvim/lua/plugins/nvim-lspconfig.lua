@@ -8,11 +8,27 @@ return { "neovim/nvim-lspconfig",
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+
     require('mason').setup()
     local mason_lspconfig = require 'mason-lspconfig'
     mason_lspconfig.setup {
-        ensure_installed = { "pyright" }
+        ensure_installed = {
+			"pyright",
+			"lua_ls",
+			"texlab",
+		}
     }
+	vim.lsp.config("lua_ls", {
+		capabilities = capabilities,
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = { "vim" },
+				},
+				workspace = { checkThirdParty = false, },
+			}
+		}
+	})
     vim.lsp.config("pyright", {
         capabilities = capabilities,
     })

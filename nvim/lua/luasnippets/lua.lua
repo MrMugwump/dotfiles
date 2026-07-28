@@ -30,5 +30,5 @@ local k = require("luasnip.nodes.key_indexer").new_key
 return {
 	s("snip", {
 		t"s(\"", i(1,"trigger"), t"\", {", i(2, "nodes"), t"}, {", i(3, "options"), t"})"
-	},{})
+	},{}),
 }
