@@ -79,17 +79,6 @@ return {
 	-- f(display_when_not_empty, {1}, {user_args = {"]"}}),d(2,get_visual)}),
 	-- {condition = tex.in_math}),
 
-	-- s({trig = "sqrt", name = "square root"}, fmta([[
-	-- \sqrt{<>}
-	-- ]],{
-	-- 	d(1,get_visual)}),{condition = tex.in_math}),
-	--
-	-- s(
-	-- 	{trig="frac", name = "fraction"},
-	-- 	fmta([[\frac{<>}{<>}]],{i(1),i(2)}),
-	-- 	{condition = tex.in_math}
-	-- ),
-
 	s("imd", fmta([[$\displaystyle <>$]], {d(1,get_visual)}), {competion = tex.in_text}),
 	s("trig", {
         d(1, function(args)
@@ -104,6 +93,7 @@ return {
             end
         end, {opt(k("ins"))})
     }),
+
 	-- there is a way of doing this with a lot less machinery but it leaves a space.
 	s("sqrt", fmta([[\sqrt<>{<>}]],
 	{ d(1,function(args) -- This adds the root but deletes it if you click space and then tab. 
@@ -116,6 +106,7 @@ return {
 		end
 	end, {opt(k("first stop"))}, { snippetstring_args = true }), d(2,get_visual) }
 	,{condition = tex.in_math})),
+
 	s("log", fmta([[\log<>{<>}]],
 	{ d(1,function(args) -- This adds the root but deletes it if you click space and then tab. 
 		if not args[1] then -- When the dynamic node is first made, nothing is there so you need to make a node
@@ -132,6 +123,7 @@ return {
 
 	s("frac", fmta([[\frac{<>}{<>}]],{i(1),i(2)}), {condition = tex.in_math}),
 
+	-- stolen from whereever i got the in_math stuff --
 	s({ trig = "lr([aAbBcmp])", name = "left right", dscr = "left right delimiters", regTrig = true, hidden = true },
 	fmta(
 	[[

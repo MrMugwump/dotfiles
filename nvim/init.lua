@@ -22,12 +22,23 @@ require("lazy").setup({
   spec = {
     -- import your plugins
     { import = "plugins" },
+	
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
+-- 	{
+-- 	'SirVer/ultisnips',
+-- 	config = function()
+-- 		vim.g.UltiSnipsExpandTrigger = "<tab>"
+-- 		vim.g.UltiSnipsJumpForwardTrigger = "<tab>"
+-- 		vim.g.UltiSnipsJumpBackwardTrigger = "<c-tab>"
+--
+-- 		vim.g.UltiSnipsEditSplit = "horizontal"
+-- 	end 
+-- }
 })
 
 require("config.keymaps")
