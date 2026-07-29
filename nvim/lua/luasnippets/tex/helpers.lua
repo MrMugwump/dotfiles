@@ -1,9 +1,23 @@
+local M = {}
+
+-- function M.sage_eval(args)
+-- 	local expr = args[1][1]
+--
+-- 	local cmd = string.format("sage -c 'print(%s)'", expr)
+-- 	local handle = io.popen(cmd)
+-- 	if not handle then return "Error running sage, maybe not in sage env?" end
+--
+-- 	local result = handle:read("a")
+-- 	handle:close()
+--
+-- 	return result
+-- end
+
 --[
 -- LuaSnip Conditions
 -- yanked from: evesdropper/luasnip-latex-snippets
 --]
 
-local M = {}
 
 -- math / not math zones
 

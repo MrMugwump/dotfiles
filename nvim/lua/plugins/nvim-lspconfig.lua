@@ -18,19 +18,20 @@ return { "neovim/nvim-lspconfig",
 			"texlab",
 		}
     }
-	vim.lsp.config("lua_ls", {
-		capabilities = capabilities,
-		settings = {
-			Lua = {
-				diagnostics = {
-					globals = { "vim" },
-				},
-				workspace = { checkThirdParty = false, },
+		-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+		vim.lsp.config("lua_ls", {
+			capabilities = capabilities,
+			settings = {
+				Lua = {
+					diagnostics = {
+						globals = { "vim" },
+					},
+					workspace = { checkThirdParty = false, },
+				}
 			}
-		}
-	})
-    vim.lsp.config("pyright", {
-        capabilities = capabilities,
-    })
+		})
+		vim.lsp.config("pyright", {
+			capabilities = capabilities,
+		})
   end
 }

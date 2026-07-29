@@ -31,13 +31,14 @@ local tex = require("luasnippets.tex.helpers")
 local get_visual = function(_, parent)
     return sn(nil, i(1, parent.snippet.env.SELECT_RAW))
 end
-local display_when_not_empty = function(args,parent,string_to_show)
-	if args[1][1] == " " then
-		return ""
-	else
-		return string_to_show
-	end
-end
+
+-- local display_when_not_empty = function(args,parent,string_to_show)
+-- 	if args[1][1] == " " then
+-- 		return ""
+-- 	else
+-- 		return string_to_show
+-- 	end
+-- end
 local brackets = {
 	a = { "\\langle", "\\rangle" },
 	A = { "Angle", "Angle" },
@@ -49,13 +50,13 @@ local brackets = {
 }
 
 return {
-	s({trig="begin",name="begin/end"},
+	s({trig="beg",name="begin/end"},
 	fmta([[
 	\begin{<>}
-		<>
+		<><>
 	\end{<>}
 	]],
-	{i(1),i(0),rep(1)})),
+	{i(1),i(2,""),f(function(_,parent) return parent.snippet.env.SELECT_RAW end),rep(1)})),
 
 	s({trig = "ln", name = "natural log"},
 	fmta([[
@@ -63,23 +64,15 @@ return {
 	]],{d(1,get_visual)}),
 	{condition = tex.in_math}),
 
-	-- there is probably a way of doing this in a better manner using a dynamic_node
-	-- s({trig = "log", name = "logarithm"},
-	-- fmta([[
-	-- \log<><><>(<>)
-	-- ]],
-	-- {f(display_when_not_empty, {1}, { user_args = {"_{"}}),i(1,"base"),
-	-- f(display_when_not_empty, {1}, {user_args = {"}"}}),d(2,get_visual)}),
-	-- {condition = tex.in_math}),
-	-- s({trig = "square", name = "square root"},
-	-- fmta([[
-	-- \sqrt<><><>{<>}
-	-- ]],
-	-- {f(display_when_not_empty, {1}, { user_args = {"["}}),i(1,"root"),
-	-- f(display_when_not_empty, {1}, {user_args = {"]"}}),d(2,get_visual)}),
-	-- {condition = tex.in_math}),
+	s("txtb", {t"\\textbf{",d(1,get_visual),t"}"}),
+	s("txti", {t"\\textit{",d(1,get_visual),t"}"}),
+
+	s("txt", {t"\\text{", d(1,get_visual), t"}"}, {completion = tex.in_text}),
+
+	s("im", {t"$",d(1,get_visual),t"$"}, {completion = tex.in_text}),
 
 	s("imd", fmta([[$\displaystyle <>$]], {d(1,get_visual)}), {competion = tex.in_text}),
+
 	s("trig", {
         d(1, function(args)
             if not args[1] then
@@ -140,36 +133,41 @@ return {
     end),
     i(0)}),
     { condition = tex.in_math}),
-	-- s("begin", {
-	-- 	t("\\begin{", i(1), t{"}", "","\\end{"},
-	-- 	d(2, function(args)
-	-- 		-- the returned snippetNode doesn't need a position; it's inserted
-	-- 		-- "inside" the dynamicNode.
-	-- 		return sn(nil, {
-	-- 			-- jump-indices are local to each snippetNode, so restart at 1.
-	-- 			i(1, args[1])
-	-- 		})
-	-- 	end,
-	-- 	{1}),t"}"
-	-- })
-    -- s("trig", {
-    --     t"text: ", i(1), t{"", "copy: "},
-    --     d(2, function(args)
-    --             -- the returned snippetNode doesn't need a position; it's inserted
-    --             -- "inside" the dynamicNode.
-    --             return sn(nil, {
-    --                 -- jump-indices are local to each snippetNode, so restart at 1.
-    --                 i(1, args[1])
-    --             })
-    --         end,
-    --     {1})
-    -- }),
-	-- s({ trig='beg', name='begin/end', dscr='begin/end environment (generic)'},
-	--    fmta([[
-	--    \begin{<>}
-	--    <>
-	--    \end{<>}
-	--    ]],
-	--    { i(1), i(0), rep(1) }
-	--    ), { condition = tex.in_text, show_condition = tex.in_text }),
+	s({trig = "scope", name = "scope environment"}, fmta([[
+	\begin{scope}[<>]
+		<>
+	\end{scope}
+	]],{
+	c(1,{
+		i(nil),
+		sn(nil, {t"shift = ({",i(1,"x"),t",",i(2,"y"),t"})"}),
+		sn(nil, {t"shift = ({",i(1,"x"),t",",i(2,"y"),t"})",t"scale = ",i(3,"1")})
+	}),
+	d(2,get_visual)
+	}), {condition = tex.in_tikz}),
+
+	s({trig = "node", name = "scope environment"},fmta([[
+	\node[<>]<><> at (<>,<>){<>};
+	]],{
+		i(1,"options"), f(function (snip_text)
+			if snip_text[1][1] == " " then
+				return ""
+			else
+				return " "
+			end
+		end,{2}),
+		i(2,"name"),
+		i(3,"x"),i(4,"y"),
+		i(5)
+	})),
+
+	s({trig = "sum", name = "summation"}, fmta([[
+	\sum_{<>=<>}^<> <>
+	]], {i(1,"i"), i(2,"1"),i(3,"n"),d(4,get_visual)}),{condition = tex.in_math}),
+
+	s("int", fmta([[\int <>\,d<>]],{d(1,get_visual),i(2,"x")}), {condition = tex.in_math}),
+
+	s("_", {f"_{",d(1,get_visual),f"}"}, {condition = tex.in_math}),
+	s("^", {f"^{",d(1,get_visual),f"}"}, {condition = tex.in_math}),
+
 }

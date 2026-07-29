@@ -30,11 +30,16 @@ return {
 	-- install jsregexp (optional!).
 	build = "make install_jsregexp",
 	config = function()
-		require("luasnip.loaders.from_lua").load({
+		require("luasnip.loaders.from_lua").lazy_load({
 			paths = snippets_dir,
 		})
-		require("luasnip").config.set_config({ 
+		require("luasnip").config.set_config({
 			store_selection_keys = "<Tab>"
 		})
+		-- require("luasnip").config.setup({
+		-- 	history = true,
+		-- 	region_check_events = "InsertEnter",
+		-- 	delete_check_events = "TextChanged,InsertLeave",
+		-- })
 	end
 }

@@ -12,6 +12,15 @@ vim.keymap.set("n", "<C-n>", "<cmd>Neotree toggle<CR>", defualt_opts)
 -- end,{ expr = true})
 --
 -- vim.keymap.set({"i","s"}, "<s-Tab>", function() require("luasnip").jump(-1) end, {silent = true})
+vim.keymap.set({ "i", "s" }, "<C-n>", function()
+	require("luasnip").change_choice(1)
+end, {silent = true})
+-- vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
+vim.keymap.set({ "i", "s" }, "<C-p>", function()
+	require("luasnip").change_choice(-1)
+end, {silent = true})
+-- vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
+
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, {silent=true})
 -- vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
