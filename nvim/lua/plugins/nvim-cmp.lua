@@ -59,20 +59,20 @@ return {
 						fallback()
 					end
 				end),
-				["<Down>"] = cmp.mapping(function (fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					else
-						fallback()
-					end
-				end),
-				["<Up>"] = cmp.mapping(function (fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					else
-						fallback()
-					end
-				end),
+				-- ["<Down>"] = cmp.mapping(function (fallback)
+				-- 	if cmp.visible() then
+				-- 		cmp.select_next_item()
+				-- 	else
+				-- 		fallback()
+				-- 	end
+				-- end),
+				-- ["<Up>"] = cmp.mapping(function (fallback)
+				-- 	if cmp.visible() then
+				-- 		cmp.select_prev_item()
+				-- 	else
+				-- 		fallback()
+				-- 	end
+				-- end),
 				["<s-Tab>"] = cmp.mapping(function(fallback)
 					if ls.jumpable(-1) then 
 						ls.jump(-1)
@@ -83,8 +83,8 @@ return {
 					end
 				end,{"i","s"}),
 			  ['<CR>'] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-					  cmp.confirm({select = true})
+					if cmp.visible() and cmp.get_selected_entry() then
+					  cmp.confirm()
 					else
 					  fallback() -- If you use vim-endwise, this fallback will behave the same as vim-endwise.
 					end

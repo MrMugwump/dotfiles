@@ -41,11 +41,11 @@ end
 -- end
 local brackets = {
 	a = { "\\langle", "\\rangle" },
-	A = { "Angle", "Angle" },
-	b = { "brack", "brack" },
-	B = { "Brack", "Brack" },
-	c = { "brace", "brace" },
-	m = { "|", "|" },
+	-- A = { "Angle", "Angle" },
+	s = { "[", "]" },
+	-- B = { "Brack", "Brack" },
+	c = { "{", "}" },
+	b = { "|", "|" },
 	p = { "(", ")" },
 }
 
@@ -98,7 +98,7 @@ return {
 			return sn(nil, {t"[",i(1,args[1][1],{key = "first stop"}),t"]"})
 		end
 	end, {opt(k("first stop"))}, { snippetstring_args = true }), d(2,get_visual) }
-	,{condition = tex.in_math})),
+	),{condition = tex.in_math}),
 
 	s("log", fmta([[\log<>{<>}]],
 	{ d(1,function(args) -- This adds the root but deletes it if you click space and then tab. 
@@ -112,12 +112,12 @@ return {
 	end, {opt(k("first stop"))}, { snippetstring_args = true }), d(2,get_visual) }
 	,{condition = tex.in_math})),
 
-	s("lim", {t( "\\lim_{x\\to"), i(1,"a"),t("}")}, {condition = tex.in_math}),
+	s("lim", {t( "\\lim_{"),i(1,"x"),t"\\to ", i(2,"a"),t("}")}, {condition = tex.in_math}),
 
 	s("frac", fmta([[\frac{<>}{<>}]],{i(1),i(2)}), {condition = tex.in_math}),
 
 	-- stolen from whereever i got the in_math stuff --
-	s({ trig = "lr([aAbBcmp])", name = "left right", dscr = "left right delimiters", regTrig = true, hidden = true },
+	s({ trig = "lr([ascbp])", name = "left right", dscr = "left right delimiters", regTrig = true, hidden = true },
 	fmta(
 	[[
     \left<> <> \right<><>
@@ -165,9 +165,30 @@ return {
 	\sum_{<>=<>}^<> <>
 	]], {i(1,"i"), i(2,"1"),i(3,"n"),d(4,get_visual)}),{condition = tex.in_math}),
 
-	s("int", fmta([[\int <>\,d<>]],{d(1,get_visual),i(2,"x")}), {condition = tex.in_math}),
+	s({ trig="int", name = "integrate with unspecified variable", regTrig = true }, fmta([[\int<>\,dx]],{
+	c(1,{
+		sn(nil, {t" ", d(1,get_visual)}),
+	sn(nil, 
+	fmta([[
+	_{<>}^{<>} <>
+	]],
+	{i(1,"a"),i(2,"b"),d(3,get_visual)})
+	)}),
+	}), {condition = tex.in_math}),
 
-	s("_", {f"_{",d(1,get_visual),f"}"}, {condition = tex.in_math}),
-	s("^", {f"^{",d(1,get_visual),f"}"}, {condition = tex.in_math}),
+	s({trig = "int([A-z])", regTrig = true, name = "integrate with specified variable"}, fmta([[\int<>\,d<>]],{c(1,{
+	sn(nil, {t" ", d(1,get_visual)}),
+	sn(nil, 
+	fmta([[
+	_{<>}^{<>} <>
+	]],
+	{i(1,"a"),i(2,"b"),d(3,get_visual)})
+	)}),
+	f(function(_,snip)
+		return snip.captures[1]
+	end)}),{condition = tex.in_math}),
+
+	s({ trig = "_", name = "subscript", wordTrig = false }, {t"_{",d(1,get_visual),t"}"}, {condition = tex.in_math}),
+	s({ trig= "^", name = "exponent/superscript", wordTrig = false }, {t"^{",d(1,get_visual),t"}"}, {condition = tex.in_math}),
 
 }

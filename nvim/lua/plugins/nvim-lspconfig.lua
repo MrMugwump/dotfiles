@@ -33,5 +33,14 @@ return { "neovim/nvim-lspconfig",
 		vim.lsp.config("pyright", {
 			capabilities = capabilities,
 		})
+		-- vim.lsp.config("texlab",{
+		-- 	settings = {
+		-- 		texlab = {
+		-- 			build = {
+		-- 				auxDirectory = "./aux",
+		-- 			},
+		-- 		}, 
+		-- 	}	
+		-- })
   end
 }

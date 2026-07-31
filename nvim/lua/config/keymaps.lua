@@ -2,6 +2,9 @@ local default_opts = { noremap = true, silent = true }
 
 vim.keymap.set("n", "<C-n>", "<cmd>Neotree toggle<CR>", defualt_opts)
 
+vim.keymap.set("n", "<leader>o", "o<Esc>")
+vim.keymap.set("n", "<leader>O", "O<Esc>")
+
 -- LuaSnip keymaps --
 -- vim.keymap.set({"i","s"},"<Tab>", function(callback)
 -- 	if require("luasnip").expand_or_jumpable() then
@@ -31,3 +34,4 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 -- vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+
