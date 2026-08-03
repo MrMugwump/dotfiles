@@ -1,1 +1,1 @@
-# $aux_dir = "aux"
+$aux_dir = "tex-aux"
