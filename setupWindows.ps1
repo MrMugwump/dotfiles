@@ -1,0 +1,5 @@
+New-Item -ItemType SymbolicLink -Path "$HOME\.bashrc" -Target "$HOME\dotfiles\.bashrc"
+New-Item -ItemType SymbolicLink -Path "$HOME\.bash_aliases" -Target "$HOME\dotfiles\.bash_aliases"
+New-Item -ItemType SymbolicLink -Path "$HOME\.vimrc" -Target "$HOME\dotfiles\.vimrc"
+New-Item -ItemType SymbolicLink -Path "$HOME\.latexmkrc" -Target "$HOME\dotfiles\.latexmkrc"
+New-Item -ItemType SymbolicLink -Path "$HOME\AppData\Local\nvim" -Target "$HOME\dotfiles\nvim"
