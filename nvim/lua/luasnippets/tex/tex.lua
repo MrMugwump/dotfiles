@@ -190,5 +190,7 @@ return {
 
 	s({ trig = "_", name = "subscript", wordTrig = false }, {t"_{",d(1,get_visual),t"}"}, {condition = tex.in_math}),
 	s({ trig= "^", name = "exponent/superscript", wordTrig = false }, {t"^{",d(1,get_visual),t"}"}, {condition = tex.in_math}),
-
+},
+{ -- Autosnippets
+	s({ trig = "``", snippetType = "autosnippet"}, {t"``",d(1,get_visual),t"\""},{condition = tex.in_text}),
 }

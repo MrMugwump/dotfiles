@@ -34,12 +34,11 @@ return {
 			paths = snippets_dir,
 		})
 		require("luasnip").config.set_config({
-			store_selection_keys = "<Tab>"
+			store_selection_keys = "<Tab>",
+			history = true,
+			region_check_events = "InsertEnter",
+			delete_check_events = "TextChanged,InsertLeave",
+			enable_autosnippets = true,
 		})
-		-- require("luasnip").config.setup({
-		-- 	history = true,
-		-- 	region_check_events = "InsertEnter",
-		-- 	delete_check_events = "TextChanged,InsertLeave",
-		-- })
 	end
 }
