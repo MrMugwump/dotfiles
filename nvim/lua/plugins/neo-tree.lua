@@ -17,19 +17,33 @@ return {
     },
     lazy = false, -- neo-tree will lazily load itself
 	opts = {
-		filesystem = {
-			filtered_items = {
-				visible = false,
-				hide_by_pattern = {
-				  "*/LaTeX/*.aux",
-				  "*.bbl",
-				  "*.blg",
-				  "*.fls",
-				  "*.fdb_latexmk",
-				  "*.synctex.gz",
-				  "*.log",
-				  "*.out",
-				}
+		-- filesystem = {
+		-- 	filtered_items = {
+		-- 		visible = false,
+		-- 		hide_by_pattern = {
+		-- 		  "*/LaTeX/*.aux",
+		-- 		  "*.bbl",
+		-- 		  "*.blg",
+		-- 		  "*.fls",
+		-- 		  "*.fdb_latexmk",
+		-- 		  "*.synctex.gz",
+		-- 		  "*.log",
+		-- 		  "*.out",
+		-- 		}
+		-- 	}
+		-- }
+		window = {
+			mappings = {
+				["<cr>"] = function(state)
+					local node = state.tree:get_node()
+
+					if node.type == "file" then
+						require("neo-tree.sources.filesystem.commands").open(state)
+						vim.cmd("Neotree close")
+					elseif node.type == "directory" then
+						require("neo-tree.sources.filesystem.commands").open(state)
+					end
+				end
 			}
 		}
 	}

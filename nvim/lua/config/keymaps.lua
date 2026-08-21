@@ -5,6 +5,9 @@ vim.keymap.set("n", "<C-n>", "<cmd>Neotree toggle<CR>", default_opts)
 vim.keymap.set("n", "<leader>o", "o<Esc>")
 vim.keymap.set("n", "<leader>O", "O<Esc>")
 
+vim.keymap.set("n","<leader>yy", "\"+yy")
+vim.keymap.set("v","<leader>y", "\"+y")
+
 -- LuaSnip keymaps --
 -- vim.keymap.set({"i","s"},"<Tab>", function(callback)
 -- 	if require("luasnip").expand_or_jumpable() then
